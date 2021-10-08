@@ -1,8 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { decrement, increment, reset } from '../state/counter.action';
-import { IState } from '../state/IState';
 
 @Component({
   selector: 'app-counter-buttons',
@@ -11,29 +8,33 @@ import { IState } from '../state/IState';
 })
 export class CounterButtonsComponent implements OnInit {
 
-
+  @Output() incrementFromChild=new EventEmitter();
+  @Output() decrementFromChild=new EventEmitter();
+  @Output() resetFromChild=new EventEmitter();
+  @Output() messageFromChild=new EventEmitter<string>();
 
   public someData:string='some data';
 
-  constructor(private store:Store<IState>) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onIncrement() {
-    this.store.dispatch(increment())
+    this.incrementFromChild.emit('Button Increment has been clicked');
 }
 
   onDecrement() {
-    this.store.dispatch(decrement())
+    this.decrementFromChild.emit();
   }
 
   onReset(){
-    this.store.dispatch(reset())
+    this.resetFromChild.emit();
+    this.onAnActionOfYourChoice();
   }
 
   onAnActionOfYourChoice () {
-
+    this.messageFromChild.emit('counter has been reset at '+new Date().toTimeString());
   }
 
 }

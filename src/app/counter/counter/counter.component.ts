@@ -9,6 +9,10 @@ import { CounterButtonsComponent } from '../counter-buttons/counter-buttons.comp
 export class CounterComponent implements OnInit {
 
   counterOfParent:number=0;
+  message:string='';
+  messageRecievedUsingViewChild:string | undefined;
+
+  @ViewChild(CounterButtonsComponent) childComponent: CounterButtonsComponent | undefined;
 
   constructor() { }
 
@@ -18,6 +22,7 @@ export class CounterComponent implements OnInit {
 
   onIncrement() {
       this.counterOfParent++;
+      this.messageRecievedUsingViewChild=this.childComponent?.someData;
   }
 
   onDecrement() {
@@ -29,4 +34,7 @@ export class CounterComponent implements OnInit {
   }
 
 
+  onRecieveSomeMessageFromChild($event: string){
+    this.message=$event;
+  }
 }
