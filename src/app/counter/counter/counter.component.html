@@ -2,36 +2,11 @@
   <div class="col-md-12">
 
     <div class="my-3">
-      <!--
-        Share datas from Parent to Child component
-        Below, we specify that the value of counter component has to be sent to a child component
-        counter-output, in variable named counterOfChild.
-        We must also add in child component an @Input() decorator :
-        @Input() counterOfChild:number=0;
-       -->
-      <app-counter-output [counterOfChild]="counterOfParent"></app-counter-output>
-
+      <app-counter-output></app-counter-output>
     </div>
     <div class="my-3">
-      <!--
-        Share datas from  Child component to Parent using listener event
-        Below, we specify that the event "incrementFromChild" from component counter-button must
-        be sent to its parent counter component and trigger onIncrement() method.
-        We must also add in child component an @Output() decorator :
-            @Output() incrementFromChild=new EventEmitter();
-        The vent is emited by calling the emit() method on th eproperty :
-            this.incrementFromChild.emit();
-      -->
-      <app-counter-buttons  (incrementFromChild)="onIncrement()"
-                            (decrementFromChild)="onDecrement()"
-                            (resetFromChild)="onReset()"
-                            (messageFromChild)="onRecieveSomeMessageFromChild($event)"
-      ></app-counter-buttons>
+      <app-counter-buttons></app-counter-buttons>
     </div>
-  </div>
-  <div>
-    <h1>"Message from Child EventEmitter &lt;string&gt;" : {{message}}</h1>
-    <h1>Message from Child UsingViewChild : {{messageRecievedUsingViewChild}}</h1>
   </div>
 
 </div>
